@@ -1,0 +1,15 @@
+[submodule "nghttp2/nghttp2"]
+    path = nghttp2/nghttp2
+    url = git://github.com/nghttp2/nghttp2.git
+[submodule "docopt/docopt.cpp"]
+    path = docopt/docopt.cpp
+    url = git://github.com/docopt/docopt.cpp.git
+[submodule "arangodb/velocypack"]
+    path = arangodb/velocypack
+    url = git://github.com/arangodb/velocypack.git
+[submodule "facebook/rocksdb"]
+    path = facebook/rocksdb
+    url = git://github.com/facebook/rocksdb.git
+[submodule "gabime/spdlog"]
+    path = gabime/spdlog
+    url = git://github.com/gabime/spdlog.git
