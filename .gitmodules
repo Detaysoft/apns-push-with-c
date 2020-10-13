@@ -1,15 +1,15 @@
-[submodule "nghttp2/nghttp2"]
-    path = nghttp2/nghttp2
+[submodule "3rdParty/nghttp2"]
+    path = 3rdParty/nghttp2
     url = git://github.com/nghttp2/nghttp2.git
-[submodule "docopt/docopt.cpp"]
-    path = docopt/docopt.cpp
+[submodule "3rdParty/docopt.cpp"]
+    path = 3rdParty/docopt.cpp
     url = git://github.com/docopt/docopt.cpp.git
-[submodule "arangodb/velocypack"]
-    path = arangodb/velocypack
+[submodule "3rdParty/velocypack"]
+    path = 3rdParty/velocypack
     url = git://github.com/arangodb/velocypack.git
-[submodule "facebook/rocksdb"]
-    path = facebook/rocksdb
+[submodule "3rdParty/rocksdb"]
+    path = 3rdParty/rocksdb
     url = git://github.com/facebook/rocksdb.git
-[submodule "gabime/spdlog"]
-    path = gabime/spdlog
+[submodule "3rdParty/spdlog"]
+    path = 3rdParty/spdlog
     url = git://github.com/gabime/spdlog.git
