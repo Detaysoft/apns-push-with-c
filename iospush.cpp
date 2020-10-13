@@ -113,15 +113,15 @@ int main(int argc, char* argv[]) {
 
         req->on_response([](const response &res) {
             // print status code and response header fields.
-            cerr << "HTTP/2 " << res.status_code() << endl;
+            cout << "HTTP/2 " << res.status_code() << endl;
             for (auto &kv : res.header()) {
-                cerr << kv.first << ": " << kv.second.value << "\n";
+                cout << kv.first << ": " << kv.second.value << "\n";
             }
-            cerr << endl;
+            cout << endl;
 
             res.on_data([](const uint8_t *data, size_t len) {
-                cerr.write(reinterpret_cast<const char *>(data), len);
-                cerr << endl;
+                cout.write(reinterpret_cast<const char *>(data), len);
+                cout << endl;
             });
         });
 
