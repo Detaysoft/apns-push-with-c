@@ -34,15 +34,19 @@ using boost::asio::ip::tcp;
 using namespace nghttp2::asio_http2::client;
 
 int main(int argc, char* argv[]) {
-    string deviceKey ("-d");
-    string messageKey ("-m");
-    string jwtKey ("-j");
-    string bundleIDKey ("-b");
+    string deviceKey ("-device");
+    string messageKey ("-message");
+    string jwtKey ("-jwt");
+    string bundleIDKey ("-bundle");
+    string titleKey ("-title");
+    string tagKey ("-tag");
 
     string device;
     string message;
     string jwt;
     string bundleID;
+    string title;
+    string tag;
 
     // set arguments
     for (int i = 0; i < argc; i++) {
@@ -57,6 +61,12 @@ int main(int argc, char* argv[]) {
         }
         else if (strcmp(bundleIDKey.c_str(), *&argv[i]) == 0) {
             bundleID = *&argv[i+1];
+        }
+        else if (strcmp(titleKey.c_str(), *&argv[i]) == 0) {
+            title = *&argv[i+1];
+        }
+        else if (strcmp(tagKey.c_str(), *&argv[i]) == 0) {
+            tag = *&argv[i+1];
         }
     }
 
@@ -81,11 +91,11 @@ int main(int argc, char* argv[]) {
     // connect to"api.push.apple.com:443"
     session sess(io_service, tls, "api.push.apple.com", "443");
 
-    sess.on_connect([&sess, &jwt, &device, &message, &bundleID](tcp::resolver::iterator endpoint_it) {
+    sess.on_connect([&sess, &jwt, &device, &message, &bundleID, &title, &tag](tcp::resolver::iterator endpoint_it) {
         boost::system::error_code ec;
 
         nghttp2::asio_http2::header_map headers;
-        headers.emplace("authorization", (nghttp2::asio_http2::header_value){ jwt });
+        headers.emplace("authorization", (nghttp2::asio_http2::header_value){ "Bearer " + jwt });
         headers.emplace("apns-priority", (nghttp2::asio_http2::header_value){ "10" });
         headers.emplace("apns-topic", (nghttp2::asio_http2::header_value){ bundleID });
         headers.emplace("apns-push-type", (nghttp2::asio_http2::header_value){ "alert" });
@@ -96,7 +106,7 @@ int main(int argc, char* argv[]) {
 
         auto req = sess.submit(
            ec, "POST", "https://api.push.apple.com/3/device/" + device,
-           "{\"apns\": {\"alert\": \"" + message + "\", \"badge\": 1}}",
+           "{\"aps\": {\"alert\": \"" + message + "\", \"badge\": 1}, \"title\": \"" + title + "\", \"body\": \"" + message + "\", \"tag\": \"" + tag + "\"}",
            headers,
            prio
         );
